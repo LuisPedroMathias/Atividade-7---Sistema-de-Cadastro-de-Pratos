@@ -1,12 +1,16 @@
 <?php
 
 include "infra/conexao.php";
-$livros = mysqli_query($conexao, "SELECT * FROM pratos");
+$pratos = mysqli_query($conexao, "SELECT idprato, nome, descricao, categoria FROM pratos");
+
+if (!$pratos) {
+    die("Erro na consulta: " . mysqli_error($conexao));
+}
 
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
@@ -21,64 +25,61 @@ $livros = mysqli_query($conexao, "SELECT * FROM pratos");
     </header>
     <main>
         <h2>Cadastrar Usuário!</h2>
-        <form action="public/cadastrar_usuario'.php" method="POST">
-            <label for="nome">Nome:</label>
-            <input type="text" name="nome">
+        <form action="public/cadastrar_usuario.php" method="POST">
+            <label for="nome_usuario">Nome:</label>
+            <input type="text" id="nome_usuario" name="nome_usuario">
             <br>
             <label for="email">E-mail:</label>
-            <input type="email" name="email">
+            <input type="email" id="email" name="email">
             <br>
             <button type="submit">Cadastrar</button>
         </form>
-         <h2>Cadastrar Prato!</h2>
+        <h2>Cadastrar Prato!</h2>
         <form action="public/cadastrar_prato.php" method="POST">
-            <label for="titulo">Título:</label>
-            <input type="text" name="titulo">
+            <label for="nome_prato">Nome:</label>
+            <input type="text" id="nome_prato" name="nome_prato">
             <br>
-            <label for="autor">Autor:</label>
-            <input type="text" name="autor">
+            <label for="descricao">Descrição:</label>
+            <input type="text" id="descricao" name="descricao">
             <br>
-            <label for="ano">Ano de Publicação:</label>
-            <input type="number" name="ano">
+            <label for="categoria">Categoria:</label>
+            <input type="text" id="categoria" name="categoria">
+            <br>
+            <label for="nome_usuario_prato">Usuário:</label>
+            <input type="text" id="nome_usuario_prato" name="nome_usuario">
             <br>
             <button type="submit">Cadastrar</button>
         </form>
         <div>
-            <h2>Livros Cadastrados</h2>
+            <h2>Pratos Cadastrados</h2>
             <table>
                 <tr>
                     <th>ID</th>
-                    <th>Título</th>
-                    <th>Autor</th>
-                    <th>Ano</th>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Categoria</th>
+                    <th>Usuário</th>
                     <th>Ações</th>
                 </tr>
-                <?php while ($livro = mysqli_fetch_assoc($livros)) { ?>
+                <?php while ($prato = mysqli_fetch_assoc($pratos)) { ?>
                     <tr>
-                        <td><?php echo $livro["id"] ?></td>
-                        <td><?php echo $livro["titulo"] ?></td>
-                        <td><?php echo $livro["autor"] ?></td>
-                        <td><?php echo $livro["ano"] ?></td>
+                        <td><?php echo htmlspecialchars($prato["idprato"]) ?></td>
+                        <td><?php echo htmlspecialchars($prato["nome"]) ?></td>
+                        <td><?php echo htmlspecialchars($prato["descricao"]) ?></td>
+                        <td><?php echo htmlspecialchars($prato["categoria"]) ?></td>
+                        <td><?php echo htmlspecialchars($prato["nome_usuario"]) ?></td>
                         <td>
-                            <a href="public/editar.php?id=<?php echo $livro["id"] ?>">Editar</a>
-                            <a href="public/excluir.php?id=<?php echo $livro["id"] ?>">Excluir</a>
+                            <a href="public/editar.php?id=<?php echo urlencode($prato["idprato"]) ?>">Editar</a>
+                            <a href="public/excluir.php?id=<?php echo urlencode($prato["idprato"]) ?>">Excluir</a>
                         </td>
                     </tr>
                 <?php } ?>
             </table>
         </div>
-
     </main>
     <footer>
 
     </footer>
-
-    </main>
-    <footer>
-
-    </footer>
-
-
 </body>
 
 </html>
