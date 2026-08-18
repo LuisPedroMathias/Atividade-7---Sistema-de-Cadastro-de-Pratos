@@ -1,7 +1,7 @@
 <?php
 
 include "infra/conexao.php";
-$livros = mysqli_query($conexao, "SELECT * FROM livros");
+$livros = mysqli_query($conexao, "SELECT * FROM pratos");
 
 ?>
 
@@ -11,17 +11,27 @@ $livros = mysqli_query($conexao, "SELECT * FROM livros");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRUD - Livraria</title>
+    <title>Sistema Cadastro de Pratos</title>
     <link rel="stylesheet" href="style/styles.css">
 </head>
 
 <body>
     <header>
-        <h1>CRUD - Livraria</h1>
+        <h1>Sistema de Cadastro de Pratos</h1>
     </header>
     <main>
-        <h2>Adicione um novo livro!</h2>
-        <form action="public/cadastrar.php" method="POST">
+        <h2>Cadastrar Usuário!</h2>
+        <form action="public/cadastrar_usuario'.php" method="POST">
+            <label for="nome">Nome:</label>
+            <input type="text" name="nome">
+            <br>
+            <label for="email">E-mail:</label>
+            <input type="email" name="email">
+            <br>
+            <button type="submit">Cadastrar</button>
+        </form>
+         <h2>Cadastrar Prato!</h2>
+        <form action="public/cadastrar_prato.php" method="POST">
             <label for="titulo">Título:</label>
             <input type="text" name="titulo">
             <br>
@@ -57,6 +67,11 @@ $livros = mysqli_query($conexao, "SELECT * FROM livros");
                 <?php } ?>
             </table>
         </div>
+
+    </main>
+    <footer>
+
+    </footer>
 
     </main>
     <footer>
