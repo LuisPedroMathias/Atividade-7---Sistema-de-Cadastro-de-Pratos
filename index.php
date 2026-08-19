@@ -1,9 +1,15 @@
 <?php
 
 include "infra/conexao.php";
-$pratos = mysqli_query($conexao, "SELECT idprato, nome, descricao, categoria FROM pratos");
+$pratos = mysqli_query($conexao, "SELECT idprato, nome_prato, descricao, preco, categoria, nome_user FROM pratos");
 
 if (!$pratos) {
+    die("Erro na consulta: " . mysqli_error($conexao));
+}
+
+$usuarios = mysqli_query($conexao, "SELECT nome_user FROM usuarios");
+
+if (!$usuarios) {
     die("Erro na consulta: " . mysqli_error($conexao));
 }
 
@@ -26,8 +32,8 @@ if (!$pratos) {
     <main>
         <h2>Cadastrar Usuário!</h2>
         <form action="public/cadastrar_usuario.php" method="POST">
-            <label for="nome_usuario">Nome:</label>
-            <input type="text" id="nome_usuario" name="nome_usuario">
+            <label for="nome_user">Nome:</label>
+            <input type="text" id="nome_user" name="nome_user">
             <br>
             <label for="email">E-mail:</label>
             <input type="email" id="email" name="email">
@@ -45,8 +51,18 @@ if (!$pratos) {
             <label for="categoria">Categoria:</label>
             <input type="text" id="categoria" name="categoria">
             <br>
-            <label for="nome_usuario_prato">Usuário:</label>
-            <input type="text" id="nome_usuario_prato" name="nome_usuario">
+            <label for="preco">Preço:</label>
+            <input type="float" id="preco" name="preco">
+            <br>
+            <label for="preco">Preço:</label>
+            <input type="float" id="preco" name="preco">
+            <br>
+            <label for="nome_user">Usuário:</label>
+            <select name="nome_user" id="nome_user">
+                <?php while ($usuario = mysqli_fetch_assoc($usuarios)) { ?>
+                    <option value="<?php echo $usuario["nome_user"] ?>"><?php echo $usuario["nome_user"] ?></option>
+                <?php } ?>
+            </select>
             <br>
             <button type="submit">Cadastrar</button>
         </form>
@@ -64,10 +80,10 @@ if (!$pratos) {
                 <?php while ($prato = mysqli_fetch_assoc($pratos)) { ?>
                     <tr>
                         <td><?php echo htmlspecialchars($prato["idprato"]) ?></td>
-                        <td><?php echo htmlspecialchars($prato["nome"]) ?></td>
+                        <td><?php echo htmlspecialchars($prato["nome_prato"]) ?></td>
                         <td><?php echo htmlspecialchars($prato["descricao"]) ?></td>
                         <td><?php echo htmlspecialchars($prato["categoria"]) ?></td>
-                        <td><?php echo htmlspecialchars($prato["nome_usuario"]) ?></td>
+                        <td><?php echo htmlspecialchars($prato["nome_user"]) ?></td>
                         <td>
                             <a href="public/editar.php?id=<?php echo urlencode($prato["idprato"]) ?>">Editar</a>
                             <a href="public/excluir.php?id=<?php echo urlencode($prato["idprato"]) ?>">Excluir</a>

@@ -2,7 +2,7 @@
 
 $host = "localhost";
 $usuario = "root";
-$senha = "root";
+$senha = "";
 $banco = "sistema_pratos_LandP";
 
 $conexao = new mysqli($host, $usuario, $senha, $banco);
