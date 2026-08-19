@@ -30,6 +30,7 @@ if (!$usuarios) {
         <h1>Sistema de Cadastro de Pratos</h1>
     </header>
     <main>
+
         <h2>Cadastrar Usuário!</h2>
         <form action="public/cadastrar_usuario.php" method="POST">
             <label for="nome_user">Nome:</label>
@@ -40,6 +41,7 @@ if (!$usuarios) {
             <br>
             <button type="submit">Cadastrar</button>
         </form>
+
         <h2>Cadastrar Prato!</h2>
         <form action="public/cadastrar_prato.php" method="POST">
             <label for="nome_prato">Nome:</label>
@@ -66,6 +68,7 @@ if (!$usuarios) {
             <br>
             <button type="submit">Cadastrar</button>
         </form>
+        
         <div>
             <h2>Pratos Cadastrados</h2>
             <table>
