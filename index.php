@@ -56,9 +56,6 @@ if (!$usuarios) {
             <label for="preco">Preço:</label>
             <input type="float" id="preco" name="preco">
             <br>
-            <label for="preco">Preço:</label>
-            <input type="float" id="preco" name="preco">
-            <br>
             <label for="nome_user">Usuário:</label>
             <select name="nome_user" id="nome_user">
                 <?php while ($usuario = mysqli_fetch_assoc($usuarios)) { ?>
