@@ -23,7 +23,7 @@ if ($stmt === false) {
         echo "<br><a href='../index.php'>Voltar</a>";
         exit();
     } else {
-        echo "Erro ao cadastrar prato: " . mysqli_error($conn);
+        echo "Erro ao cadastrar prato: " . mysqli_error($conexao);
     }
 
 

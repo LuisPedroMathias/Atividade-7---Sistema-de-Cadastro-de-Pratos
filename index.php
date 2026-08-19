@@ -1,8 +1,8 @@
 <?php
 
 include "infra/conexao.php";
-$pratos = mysqli_query($conexao, "SELECT idprato, nome, descricao, categoria FROM pratos");
-
+$pratos = mysqli_query($conexao, "SELECT idprato, nome_prato, descricao, categoria FROM pratos");
+    
 if (!$pratos) {
     die("Erro na consulta: " . mysqli_error($conexao));
 }
