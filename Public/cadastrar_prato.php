@@ -21,6 +21,7 @@ if ($stmt === false) {
  if (mysqli_stmt_execute($stmt)) {
         echo "Prato cadastrado com sucesso!";
         echo "<br><a href='../index.php'>Voltar</a>";
+        mysqli_stmt_close($stmt);
         exit();
     } else {
         echo "Erro ao cadastrar prato: " . mysqli_error($conexao);
