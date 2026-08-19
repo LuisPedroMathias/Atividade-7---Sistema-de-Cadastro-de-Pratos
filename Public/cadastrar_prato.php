@@ -12,23 +12,21 @@ $sql = "INSERT INTO pratos (nome_prato, descricao, preco, categoria, nome_user) 
 
 $stmt = mysqli_prepare($conexao, $sql);
 
-mysqli_stmt_bind_param($stmt, 'ssdsi', $nome_prato, $descricao, $preco, $categoria, $nome_user);
-
 if ($stmt === false) {
     die("Erro ao preparar a inserção do prato: " . mysqli_error($conexao));
 }
 
- if (mysqli_stmt_execute($stmt)) {
-        echo "Prato cadastrado com sucesso!";
-        echo "<br><a href='../index.php'>Voltar</a>";
-        mysqli_stmt_close($stmt);
-        exit();
-    } else {
-        echo "Erro ao cadastrar prato: " . mysqli_error($conexao);
-    }
+mysqli_stmt_bind_param($stmt, 'ssdss', $nome_prato, $descricao, $preco, $categoria, $nome_user);
 
-
-mysqli_stmt_execute($stmt);
+if (mysqli_stmt_execute($stmt)) {
+    echo "Prato cadastrado com sucesso!";
+    echo "<br><a href='../index.php'>Voltar</a>";
+    mysqli_stmt_close($stmt);
+    exit();
+} else {
+    echo "Erro ao cadastrar prato: " . mysqli_error($conexao);
+}
 
 header("Location: ../index.php");
+
 ?>
