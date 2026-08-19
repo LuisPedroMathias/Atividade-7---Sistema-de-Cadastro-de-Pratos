@@ -85,7 +85,7 @@ if (!$usuarios) {
                         <td><?php echo htmlspecialchars($prato["categoria"]) ?></td>
                         <td><?php echo htmlspecialchars($prato["nome_user"]) ?></td>
                         <td>
-                            <a href="public/editar.php?id=<?php echo urlencode($prato["idprato"]) ?>">Editar</a>
+                            <a href="public/editar.php?idprato=<?php echo urlencode($prato["idprato"]) ?>">Editar</a>
                             <a href="public/deletar.php?idprato=<?php echo urlencode($prato["idprato"]) ?>">Excluir</a>
                         </td>
                     </tr>
