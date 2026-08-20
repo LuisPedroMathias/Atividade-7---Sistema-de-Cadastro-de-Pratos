@@ -74,6 +74,7 @@ if (!$usuarios) {
                     <th>Nome</th>
                     <th>Descrição</th>
                     <th>Categoria</th>
+                    <th>Preço</th>
                     <th>Usuário</th>
                     <th>Ações</th>
                 </tr>
@@ -83,6 +84,7 @@ if (!$usuarios) {
                         <td><?php echo htmlspecialchars($prato["nome_prato"]) ?></td>
                         <td><?php echo htmlspecialchars($prato["descricao"]) ?></td>
                         <td><?php echo htmlspecialchars($prato["categoria"]) ?></td>
+                        <td><?php echo number_format($prato["preco"], 2, ',', '.') ?></td>
                         <td><?php echo htmlspecialchars($prato["nome_user"]) ?></td>
                         <td>
                             <a href="public/editar.php?idprato=<?php echo urlencode($prato["idprato"]) ?>">Editar</a>
