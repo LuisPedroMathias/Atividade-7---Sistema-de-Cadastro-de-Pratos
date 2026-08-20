@@ -71,7 +71,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <label for="usuario">Usuário:</label>
             <select name="nome_user" id="nome_user">
                 <?php while ($usuario = mysqli_fetch_assoc($usuarios)) { ?>
-                    <option value="<?php echo $usuario["nome_user"] ?>"><?php echo $usuario["nome_user"] ?></option>
+                    <option 
+                        value="<?php echo htmlspecialchars($usuario["nome_user"]) ?>"
+                        <?php if ($usuario["nome_user"] === $prato["nome_user"]) echo "selected"; ?>
+                    >
+                        <?php echo htmlspecialchars($usuario["nome_user"]) ?>
+                    </option>
                 <?php } ?>
             </select>
         <br>
