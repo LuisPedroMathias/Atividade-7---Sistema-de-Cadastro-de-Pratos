@@ -34,10 +34,10 @@ if (!$usuarios) {
         <h2>Cadastrar Usuário!</h2>
         <form action="public/cadastrar_usuario.php" method="POST">
             <label for="nome_user">Nome:</label>
-            <input type="text" id="nome_user" name="nome_user">
+            <input type="text" id="nome_user" name="nome_user" required>
             <br>
             <label for="email">E-mail:</label>
-            <input type="email" id="email" name="email">
+            <input type="email" id="email" name="email" required>
             <br>
             <button type="submit">Cadastrar</button>
         </form>
@@ -45,19 +45,19 @@ if (!$usuarios) {
         <h2>Cadastrar Prato!</h2>
         <form action="public/cadastrar_prato.php" method="POST">
             <label for="nome_prato">Nome:</label>
-            <input type="text" id="nome_prato" name="nome_prato">
+            <input type="text" id="nome_prato" name="nome_prato" required>
             <br>
             <label for="descricao">Descrição:</label>
-            <input type="text" id="descricao" name="descricao">
+            <input type="text" id="descricao" name="descricao" required>
             <br>
             <label for="categoria">Categoria:</label>
-            <input type="text" id="categoria" name="categoria">
+            <input type="text" id="categoria" name="categoria" required>
             <br>
             <label for="preco">Preço:</label>
-            <input type="float" id="preco" name="preco">
+            <input type="number" id="preco" name="preco" step="0.01" required>
             <br>
             <label for="nome_user">Usuário:</label>
-            <select name="nome_user" id="nome_user">
+            <select name="nome_user" id="nome_user" required>
                 <?php while ($usuario = mysqli_fetch_assoc($usuarios)) { ?>
                     <option value="<?php echo $usuario["nome_user"] ?>"><?php echo $usuario["nome_user"] ?></option>
                 <?php } ?>
