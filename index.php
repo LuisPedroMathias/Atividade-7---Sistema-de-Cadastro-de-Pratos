@@ -1,7 +1,18 @@
 <?php
 
 include "infra/conexao.php";
-$pratos = mysqli_query($conexao, "SELECT idprato, nome_prato, descricao, preco, categoria, nome_user FROM pratos");
+
+$filtro_usuario = isset($_GET["nome_user"]) ? $_GET["nome_user"] : "";
+
+if ($filtro_usuario !== "") {
+    $sql = "SELECT idprato, nome_prato, descricao, preco, categoria, nome_user FROM pratos WHERE nome_user = ?";
+    $stmt = mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($stmt, "s", $filtro_usuario);
+    mysqli_stmt_execute($stmt);
+    $pratos = mysqli_stmt_get_result($stmt);
+} else {
+    $pratos = mysqli_query($conexao, "SELECT idprato, nome_prato, descricao, preco, categoria, nome_user FROM pratos");
+}
 
 if (!$pratos) {
     die("Erro na consulta: " . mysqli_error($conexao));
@@ -65,7 +76,7 @@ if (!$usuarios) {
             <br>
             <button type="submit">Cadastrar</button>
         </form>
-        
+
         <div>
             <h2>Pratos Cadastrados</h2>
             <table>
@@ -78,6 +89,23 @@ if (!$usuarios) {
                     <th>Usuário</th>
                     <th>Ações</th>
                 </tr>
+
+                <form action="" method="GET">
+                    <label for="nome_user_filtro">Usuário:</label>
+                    <select name="nome_user" id="nome_user_filtro">
+                        <option value="">Todos</option>
+                        <?php
+                        mysqli_data_seek($usuarios, 0);
+                        while ($usuario = mysqli_fetch_assoc($usuarios)) {
+                        ?>
+                            <option value="<?php echo htmlspecialchars($usuario["nome_user"]) ?>" <?php echo ($usuario["nome_user"] == $filtro_usuario) ? "selected" : "" ?>>
+                                <?php echo htmlspecialchars($usuario["nome_user"]) ?>
+                            </option>
+                        <?php } ?>
+                    </select>
+                    <button type="submit">Filtrar</button>
+                </form>
+
                 <?php while ($prato = mysqli_fetch_assoc($pratos)) { ?>
                     <tr>
                         <td><?php echo htmlspecialchars($prato["idprato"]) ?></td>
